@@ -10,30 +10,19 @@ public class Character : MonoBehaviour
     [SerializeField]
     private float gSpeed = 2f;
 
-    private Vector3 lastForward;
     private Rigidbody rb;
 
-    private float lastY;
 
     // Start is called before the first frame update
     void Start()
     {
-        lastForward = Vector3.zero;
-
         rb = GetComponent<Rigidbody>();
-        lastY = transform.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
        
-    }
-
-
-    private void LateUpdate()
-    {
-        lastY = transform.position.y;
     }
 
 
@@ -64,8 +53,9 @@ public class Character : MonoBehaviour
             print(hit.distance);
 
             transform.position += (movement * speed - ((hit.normal - offset) * gSpeed)) * Time.fixedDeltaTime;
-            transform.Rotate(0.0f, input.x * 5, 0.0f);
-            transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+            
+            transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * 
+                Quaternion.Euler(0.0f, input.x * 5, 0.0f) * transform.rotation;
         }
         else
         {
@@ -73,7 +63,6 @@ public class Character : MonoBehaviour
             rb.MovePosition(transform.position + input * Time.fixedDeltaTime * speed);
         }
 
-        lastForward = forward;
     }
 
 
@@ -87,20 +76,6 @@ public class Character : MonoBehaviour
             Color.green);
         Debug.DrawRay(transform.position, transform.forward * hit.distance * 3,
             Color.magenta);
-    }
-
-
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
-
-
-    private void OnTriggerStay(Collider other)
-    {
-        
     }
 
 }
