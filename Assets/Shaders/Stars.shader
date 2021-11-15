@@ -141,8 +141,8 @@ Shader "Unlit/unlit"
 
 					if (frac(i / 10.0) == 0.0)
 					{
-						color.r *= rand1d(0.2 * i, 0.2, 0.9);
-						color.g *= rand1d(0.9 * i, 0.7, 0.8);
+						color.r *= rand1d(0.2 * i, 0.3, 0.5);
+						color.g *= rand1d(0.9 * i, 0.1, 0.2);
 						color.b *= rand1d(2.0 * i, 0.3, 0.5);
 					}
 				}
